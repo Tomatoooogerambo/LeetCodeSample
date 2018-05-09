@@ -1,0 +1,91 @@
+# 题目说明
+*Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.*
+
+## Example 1
+```
+Input: 121
+Output: true
+```
+
+## Example 2
+```
+Input: -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+```
+## Example 3
+```
+Input: 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+```
+
+## 一解通过 是
+## 参考通过 是
+## 完成改进 是
+
+## 思路
+*1. 数组*<br>
+*2. 前后递增索引，比较索引值是否相等*
+
+## 代码（一解）
+*1. 代码中的注释尽量全，容易理解和读懂*<br>
+*2. 标注代码是一解还是参考*
+```
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x < 0)
+            return false;
+        if(x<10)
+            return true;
+     
+        // the length of the x
+        int l = 0;
+        
+        // back x
+        int temp = x;
+        while(x > 0) {
+            l++;
+            x = x/10;
+        }
+        x = temp;    
+        int[] array = new int[l];
+        int low = 0, hi = l-1; 
+        for(int i = 0; i < l; i++){
+            array[i]= x%10;
+            x = x/10;
+        }
+        while(low < hi) {
+            if(array[low++] != array[hi--])
+                return false;
+        }
+        
+        return true;
+    }
+}
+```
+## 代码（参考解）
+*1. 未使用数据结构*<br>
+*2. 若回文数，从后往前再算一遍结果不变*
+```
+	public static boolean isPalindrome(int x) {
+		// 将数据重新算一遍， 如果是回文数则得到与原始相同
+		if(x < 0)
+			return false;
+		if(x < 10)
+			return true;
+		int num = 0, xBack = x;
+		while(xBack > 0) {
+			num = num * 10 + xBack%10;
+			xBack /= 10;
+		}
+		return num == x;
+	}
+```
+## 比较
+*1. 参考解并没有用特别的数据结构*<br>
+*2. 利用回文数的特性？*<br>
+*3. 参考节挖掘到了提干中的关键点，题目解决难度大大降低*<br>
+
+## 总结
+对于提干的分析，尽量挖掘出隐藏的解答线索，是解决算法题的一个非常好思路
