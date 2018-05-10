@@ -1,0 +1,45 @@
+# 题目说明
+Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+
+Note: You may not slant the container and n is at least 2.
+
+
+
+## 一解通过 否
+## 参考通过 是
+## 完成改进 是
+
+## 思路
+*1. 未使用特殊的数据结构*<br>
+*2. 使用首尾双指针的方式*
+
+## 代码（参考解）
+```
+public class Solution {
+    public int maxArea(int[] height) {
+        int low = 0, high = height.length - 1;
+        int maxWater = 0;
+        while(low < high) {
+            int l = height[low];
+            int h = height[high];
+            maxWater = Math.max(maxWater, Math.min(l,h) * (high - low));
+            
+            if(l < h)
+                ++low;
+            else
+                --high;
+        }
+        return maxWater;
+    }
+}
+```
+
+## 比较
+*1. 无特殊数据结构？*<br>
+*2. 使用双索引进行优化？*<br>
+*3. 改进后代码更加简洁*<br>
+
+## 总结
+原有的思路是暴力破解，但是这种方式明显是O(n2)的方法，提交肯定是超过时间限制的<br>
+因此， 希望找到改进的方法<br>
+但是， 挖掘题意想不到首尾法， 对题目的分析能力还是不够，挖掘不到关键点无法完成改进，限制了我的很多发挥
